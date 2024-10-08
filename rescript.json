@@ -1,0 +1,22 @@
+{
+  "name": "yt-creator-tool",
+  "sources": [
+    {
+      "dir": "src",
+      "subdirs": true
+    }
+  ],
+  "package-specs": [
+    {
+      "module": "es6",
+      "in-source": true
+    }
+  ],
+  "suffix": ".res.js",
+  "jsx": {
+    "version": 4,
+    "mode": "automatic"
+  },
+  "bs-dependencies": ["@rescript/react", "@rescript/core"],
+  "bsc-flags": ["-open RescriptCore"]
+}

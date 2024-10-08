@@ -4,8 +4,11 @@
   "description": "",
   "main": "vite.config.js",
   "scripts": {
+    "res:dev": "rescript -w",
+    "res:build": "rescript",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "vite build && npm run postBuild",
+    "build": "npm run build-widget && vite build",
+    "build-widget": "vite build --config vite.widget.js",
     "postBuild": "npm run bundle-script",
     "bundle-script": "cp app/extension/manifest.json dist/manifest.json && npm run mv-popup",
     "mv-popup": "cp -r src/popup/ext/. dist/popup"
@@ -14,12 +17,15 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@rescript/react": "^0.13.0",
     "@vitejs/plugin-react": "^4.3.1",
     "elm-debug-transformer": "^1.2.1",
     "react-dom": "^18.3.1",
     "rescript": "^11.1.4",
     "vite": "^5.4.7",
     "vite-plugin-elm": "^3.0.1"
+  },
+  "dependencies": {
+    "@rescript/core": "^1.6.0",
+    "@rescript/react": "^0.12.0"
   }
 }
