@@ -4,7 +4,6 @@ external createElement: string => Dom.element = "createElement"
 module App = {
   @react.component
   let make = () => {
-    Console.log("hello kemal")
     <div>
       <TitleCheck props={text: "Here is title checker"} />
     </div>
