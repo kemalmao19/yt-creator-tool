@@ -1,0 +1,25 @@
+{
+  "name": "yt-ex",
+  "version": "1.0.0",
+  "description": "",
+  "main": "vite.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "vite build && npm run postBuild",
+    "postBuild": "npm run bundle-script",
+    "bundle-script": "cp app/extension/manifest.json dist/manifest.json && npm run mv-popup",
+    "mv-popup": "cp -r src/popup/ext/. dist/popup"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@rescript/react": "^0.13.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "elm-debug-transformer": "^1.2.1",
+    "react-dom": "^18.3.1",
+    "rescript": "^11.1.4",
+    "vite": "^5.4.7",
+    "vite-plugin-elm": "^3.0.1"
+  }
+}
