@@ -6,6 +6,7 @@
   "scripts": {
     "res:dev": "rescript -w",
     "res:build": "rescript",
+    "res:clean": "rescript clean",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run build-widget && vite build",
     "build-widget": "vite build --config vite.widget.js",
