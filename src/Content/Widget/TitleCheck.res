@@ -15,7 +15,12 @@ let make = (~props: prop) => {
   let view = <div id="TitleChecker.view"> {React.string(props.text)} </div>
 
   let watcher = (mutationList, observer) => {
-    Console.log(mutationList)
+    let textBox =
+      mutationList
+      ->Belt.Array.get(0)
+      ->Belt.Option.map(mutation => {MutationRecord.target(mutation)})
+      ->Belt.Option.map(el => {Node.innerText(el)})
+    Console.log(textBox)
   }
 
   let observer = MutationObserver.make(watcher)
