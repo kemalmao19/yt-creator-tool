@@ -5,7 +5,9 @@ module App = {
   @react.component
   let make = () => {
     Console.log("hello kemal")
-    <> {React.string("Hello")} </>
+    <div>
+      <TitleCheck props={text: "Here is title checker"} />
+    </div>
   }
 }
 
