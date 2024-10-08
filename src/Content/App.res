@@ -9,6 +9,12 @@ module App = {
   }
 }
 
-let render = createElement("div")
-let root = ReactDOM.Client.createRoot(render)
-ReactDOM.Client.Root.render(root, <App />)
+let onMessageListener = port => {
+  Console.log(port)
+  let render = createElement("div")
+  let root = ReactDOM.Client.createRoot(render)
+  ReactDOM.Client.Root.render(root, <App />)
+}
+
+let port = Chrome.Runtime.connect({name: "yt-widget-content"})
+Chrome.Runtime.Port.addListener(port, onMessageListener)
