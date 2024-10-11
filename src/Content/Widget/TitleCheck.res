@@ -1,7 +1,7 @@
 open Webapi.Dom
-
 type prop = {text: string}
 type model = Overlimit(float) | Underlimit(float)
+// type config = {attributes: bool, childList: bool, subtree: bool}
 
 let titleSelector = "ytcp-video-title"
 let titleSelectorInput = "ytcp-social-suggestion-input"
@@ -9,42 +9,6 @@ let observerConfig = {
   "attributes": false,
   "childList": true,
   "subtree": true,
-}
-
-let pause = () => {
-  Js.Promise2.make((~resolve, ~reject) => {
-    let wait = Js.Global.setTimeout(_ => resolve(None), 500)
-  })
-}
-
-exception TestError(string)
-
-let rec queryDomHelp = async (maybeAncestor, selector, n): promise<Dom.element> => {
-  if n < 0 {
-    Js.Promise2.reject(TestError("Not Found"))
-  } else {
-    let wait = await pause()
-    let maybeEl: option<
-      Dom.element,
-    > = maybeAncestor->Belt.Option.mapWithDefault(
-      Document.querySelector(document, selector),
-      dialog => {
-        dialog->Element.querySelector(selector)
-      },
-    )
-    switch maybeEl {
-    | None => await queryDomHelp(maybeAncestor, selector, n - 1)
-    | Some(el) => Js.Promise2.resolve(el)
-    }
-  }
-}
-
-let query = (maybeUploadDialog, _) => {
-  let videoTitleElQuery =
-    queryDomHelp(maybeUploadDialog, "ytcp-video-title", 5)->Js.Promise2.then(el => el)
-  let videoTitleInputElQuery =
-    queryDomHelp(maybeUploadDialog, "ytcp-social-suggestion-input", 5)->Js.Promise2.then(el => el)
-  Js.Promise2.all([videoTitleElQuery, videoTitleInputElQuery])
 }
 
 module TitleChecker = {
@@ -77,13 +41,7 @@ module TitleChecker = {
 
     let observer = MutationObserver.make(watcher)
 
-    let queryResult = ReactQuery.useQuery({
-      queryFn: query(maybeUploadDialog, _),
-      queryKey: ["titlechecker"],
-      refetchOnMount: ReactQuery.refetchOnMount(#bool(true)),
-      refetchOnWindowFocus: ReactQuery.refetchOnWindowFocus(#bool(false)),
-      staleTime: ReactQuery.time(#number(1)),
-    })
+    let queryResult = Query.queryResult(maybeUploadDialog)
 
     switch queryResult {
     | {isLoading: true} => "Loading..."->React.string
@@ -103,6 +61,7 @@ module TitleChecker = {
         MutationObserver.observe(observer, titleInput, observerConfig)
         ReactDOM.createPortal(view, titleEl)
       }
+    | _ => <> </>
     }
   }
 }

@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "Hello Extensions",
-  "description": "Base Level Extension",
+  "name": "Youtube Creator Tool",
+  "description": "This is an extension to help creator serve their content more professional",
   "version": "1.0",
   "action": {
     "default_popup": "./popup/popup.html",

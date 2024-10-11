@@ -94,7 +94,7 @@ let app = Dom.Document.querySelector(document, "title")->Belt.Option.map(title =
         }
       }
 
-      React.useEffect0(() => {
+      React.useEffectOnEveryRender(() => {
         let bodyObserver = Dom.MutationObserver.make(bodyElWatcher)
         let titleObserver = Dom.MutationObserver.make(titleElWatcher)
         Dom.MutationObserver.observe(bodyObserver, bodyEl, observerConfig)
