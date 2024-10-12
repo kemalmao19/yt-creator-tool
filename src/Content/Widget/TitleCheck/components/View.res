@@ -4,7 +4,7 @@ module Progress = {
   let view = (len: float) => {
     let w_ = len /. 60.0 *. 100.
     let w = Js.Math.min_float(w_, 100.)
-    let width = Float.toString(w) ++ "%"
+    let _width = Float.toString(w) ++ "%"
     let backgroundColor = if len > 60.0 {
       colors["red"]["500"]
     } else if len > 42.0 {

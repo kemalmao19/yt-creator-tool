@@ -61,7 +61,7 @@ module TitleChecker = {
         MutationObserver.observe(observer, titleInput, observerConfig)
         ReactDOM.createPortal(view, titleEl)
       }
-    | _ => <> </>
+    | _ => React.null
     }
   }
 }

@@ -86,7 +86,7 @@ let app = Dom.Document.querySelector(document, "title")->Belt.Option.map(title =
           ->Belt.Option.mapWithDefault("", Dom.Node.textContent)
 
         let route = Js.String.split(" - ", title)
-        Console.log2("route", route)
+        // Console.log2("route", route)
 
         switch route {
         | ["Video details", _] | ["Detail video", _] => dispatch(SetPage(Details))
